@@ -1,10 +1,10 @@
 const hamburger = document.getElementById('hamburger-btn');
-const navLinks = document.querySelector('.nav-links');
+const navLinks = document.querySelector('.amos');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
 });
-document.querySelectorAll('.nav-links li a').forEach(link => {
+document.querySelectorAll('.amos li a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
@@ -46,3 +46,49 @@ document.getElementById('contact-form').addEventListener('submit', (e) => {
     alert('Thank you for reaching out! I will get back to you shortly.');
     e.target.reset();
 });
+
+
+(function () {
+    const track     = document.getElementById('sliderTrack');
+    const dotsWrap  = document.getElementById('sliderDots');
+    const prevBtn   = document.getElementById('sliderPrev');
+    const nextBtn   = document.getElementById('sliderNext');
+
+    if (!track || !dotsWrap) return;
+
+    const slides     = track.querySelectorAll('.slide');
+    const total      = slides.length;
+    let   current    = 0;
+
+
+    slides.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+    });
+
+    function goTo(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        current = index;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+        });
+    }
+
+    prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn && nextBtn.addEventListener('click', () => goTo(current + 1));
+
+
+    let startX = null;
+    track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+        if (startX === null) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+        startX = null;
+    });
+})();
+
