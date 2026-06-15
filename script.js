@@ -38,7 +38,7 @@ function erase() {
     }
 }
 document.addEventListener("DOMContentLoaded", () => {
-    if(textArray.length) setTimeout(type, newTextDelay + 250);
+    if (textArray.length) setTimeout(type, newTextDelay + 250);
 });
 document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('contact-form').addEventListener('submit', (e) => {
@@ -49,16 +49,16 @@ document.getElementById('contact-form').addEventListener('submit', (e) => {
 
 
 (function () {
-    const track     = document.getElementById('sliderTrack');
-    const dotsWrap  = document.getElementById('sliderDots');
-    const prevBtn   = document.getElementById('sliderPrev');
-    const nextBtn   = document.getElementById('sliderNext');
+    const track = document.getElementById('sliderTrack');
+    const dotsWrap = document.getElementById('sliderDots');
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
 
     if (!track || !dotsWrap) return;
 
-    const slides     = track.querySelectorAll('.slide');
-    const total      = slides.length;
-    let   current    = 0;
+    const slides = track.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
 
 
     slides.forEach((_, i) => {
