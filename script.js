@@ -40,12 +40,6 @@ function erase() {
 document.addEventListener("DOMContentLoaded", () => {
     if (textArray.length) setTimeout(type, newTextDelay + 250);
 });
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('contact-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Thank you for reaching out! I will get back to you shortly.');
-    e.target.reset();
-});
 
 
 (function () {
